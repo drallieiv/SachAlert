@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Parc de la tête d'or -->
+	<bean id="ttdor" p:group="Tête d'Or" parent="poi" abstract="true" />
+	<bean p:name="Yokohama" parent="ttdor" c:latitude="45.778968" c:longitude="4.8470410"/>
+	<bean p:name="Parc au daims" parent="ttdor" c:latitude="45.775041" c:longitude="4.853837"/>
+	<bean p:name="La Roseraie" parent="ttdor" c:latitude="45.778968" c:longitude="4.8470410"/>
+	<bean p:name="Yokohama" parent="ttdor" c:latitude="45.778968" c:longitude="4.8470410"/>
+
+	<bean id="poi" abstract="true" class="com.herazade.sachalert.core.geo.POI" factory-bean="GeoService" factory-method="createPOI" />
+
+	<bean id="GeoService" class="com.herazade.sachalert.core.geo.GeoService" />
+
+</beans>

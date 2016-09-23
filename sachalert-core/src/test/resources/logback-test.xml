@@ -1,0 +1,33 @@
+<configuration debug="true">
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="SENDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern> %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+		
+	<logger name="com.herazade.sachalert.core.send" level="DEBUG" additivity="false">
+		<appender-ref ref="SENDOUT" />
+	</logger>
+	
+	<logger name="com.herazade.sachalert.core.step" level="DEBUG" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+	
+	<logger name="com.herazade.sachalert.core.geo" level="DEBUG" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>

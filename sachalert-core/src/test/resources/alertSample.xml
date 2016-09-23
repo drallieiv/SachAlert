@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Pikachu a tete d'or -->
+	<bean id="pikachu1" p:pokemonId="25" p:disappearTime="2400" p:latitude="45.780540" p:longitude="4.849058" class="com.herazade.sachalert.api.PokemonEncounterInstance"></bean>
+
+	<!-- Roucool a tete d'or -->
+	<bean id="roucool" p:pokemonId="16" p:disappearTime="2400" p:latitude="45.780520" p:longitude="4.849053" class="com.herazade.sachalert.api.PokemonEncounterInstance"></bean>
+
+
+	<!-- Pikachu a vaise -->
+	<bean id="pikachu2" p:pokemonId="25" p:disappearTime="1100" p:latitude="45.776965" p:longitude="4.800467" class="com.herazade.sachalert.api.PokemonEncounterInstance"></bean>
+
+	<!-- arcanin a tete d'or -->
+	<bean id="arcanin" p:pokemonId="59" p:disappearTime="2400" p:latitude="45.773413" p:longitude="4.857363" class="com.herazade.sachalert.api.PokemonEncounterInstance"></bean>
+
+
+</beans>

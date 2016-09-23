@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<import resource="poi.xml" />
+
+	<bean id="start" class="com.herazade.sachalert.core.step.filter.PokemonIdBlackList" p:next-ref="addPokedexInfo">
+		<property name="blackList">
+			<bean factory-bean="Pokedex" factory-method="getSuperCommons"/>
+		</property>
+	</bean>
+	
+	<bean id="addPokedexInfo" class="com.herazade.sachalert.core.step.data.AddPokedexInfo" p:next-ref="addEncounterData"/>
+	<bean id="addEncounterData" class="com.herazade.sachalert.core.step.data.AddEncounterData" p:next-ref="dispatch"/>
+	
+	<bean id="dispatch" class="com.herazade.sachalert.core.step.logic.ToAll">
+		<property name="next">
+			<list>
+				<bean class="com.herazade.sachalert.core.step.data.SetTrainer" p:trainer-ref="Sacha" p:next-ref="filterByZone"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="filterByZone" class="com.herazade.sachalert.core.step.logic.InTrainerZone" p:next-ref="addDirection"/>
+	
+	<bean id="addDirection" class="com.herazade.sachalert.core.step.data.AddDirection" p:next-ref="Log"/>
+		
+		
+	<bean id="Log" class="com.herazade.sachalert.core.step.Send" p:sender-ref="logOutput"/>
+	
+	<bean id="Sacha" p:name="Sacha" p:showPoiGroup="true" class="com.herazade.sachalert.core.Trainer">
+		<property name="zone">
+			<bean p:name="Parc de la tete d'or" class="com.herazade.sachalert.core.geo.Zone" factory-bean="GeoService" factory-method="createZone">
+				<!-- Tete d'or -->
+				<constructor-arg value="#{new double[]{45.786331, 4.859959,45.769045, 4.858221,45.776709, 4.843587,45.783637, 4.846784, 45.786465, 4.853972}}"/>
+			</bean>
+		</property>
+	</bean>
+	
+	
+	<bean id="logOutput" class="com.herazade.sachalert.core.send.LogOutput">
+		<property name="messageTemplate" value="Un ${name} est apparu ${directions} \n ${location}"></property>
+	</bean>
+	<bean id="Pokedex" class="com.herazade.sachalert.core.data.Pokedex"/>
+	<bean id="GeoService" class="com.herazade.sachalert.core.geo.GeoService"/>
+
+</beans>
